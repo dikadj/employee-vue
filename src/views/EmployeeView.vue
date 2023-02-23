@@ -166,7 +166,7 @@ export default {
     searchEmployees() {
       this.employees = this.employeesReset
       const filteredEmployees = (
-        this.employees.filter(e => e.nik.toString().includes(this.nikSearchInput))
+        this.employees.filter(e => e.id.toString().includes(this.nikSearchInput))
                       .filter(e => e.fullname.toString().toLowerCase().includes(this.fullnameSearchInput.toLowerCase()))
       )
       this.employees = filteredEmployees
