@@ -14,8 +14,8 @@
             <div class="container-fluid mx-3">
                 <div class="row">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-                    <li class="breadcrumb-item"><router-link to="/employee">Employee</router-link></li>
+                    <li class="breadcrumb-item"><router-link :to="linkTo('/')">Home</router-link></li>
+                    <li class="breadcrumb-item"><router-link :to="linkTo('/employee')">Employee</router-link></li>
                     <li class="breadcrumb-item active">Add</li>
                 </ol>
                 </div>
@@ -109,6 +109,10 @@ export default {
         ErrorMessage,
     },
     methods: {
+        linkTo(path) { // change base when needed
+            // return '/employee-vue' + path
+            return path
+        },
         joinDateFocus(e) {
             e.target.type = "date"
         },
@@ -197,7 +201,7 @@ export default {
                 return "- Salary is required"
             }
 
-            if (parseInt(val) <= 3000000 || parseInt(val) >= 30000000) {
+            if (parseInt(val) < 3000000 || parseInt(val) > 30000000) {
                 this.salaryClear = false
                 return "- Salary must be between 3.000.000 to 30.000.000"
             }

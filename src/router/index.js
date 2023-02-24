@@ -2,6 +2,25 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
 const routes = [
+  // Redirects
+  // {
+  //   path: '/',
+  //   redirect: '/employee-vue'
+  // },
+  // {
+  //   path: '/employee',
+  //   redirect: '/employee-vue/employee'
+  // },
+  // {
+  //   path: '/employee/add',
+  //   redirect: '/employee-vue/employee/add'
+  // },
+  // {
+  //   path: '/employee/update/:id',
+  //   redirect: '/employee-vue/employee/update/:id',
+  // },
+  
+  // Actual paths
   {
     path: '/',
     name: 'home',
@@ -16,12 +35,12 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/EmployeeView.vue')
   },
   {
-    path: "/employee/add",
+    path: '/employee/add',
     name: "add_employee",
     component: () => import("../views/AddEmployee.vue")
   },
   {
-    path: "/employee/update/:id",
+    path: '/employee/update/:id?',
     name: "update_employee",
     component: () => import("../views/UpdateEmployee.vue")
   }

@@ -14,8 +14,8 @@
             <div class="container-fluid mx-3">
                 <div class="row">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
-                    <li class="breadcrumb-item"><router-link to="/employee">Employee</router-link></li>
+                    <li class="breadcrumb-item"><router-link :to="linkTo('/')">Home</router-link></li>
+                    <li class="breadcrumb-item"><router-link :to="linkTo('/employee')">Employee</router-link></li>
                     <li class="breadcrumb-item active">Update</li>
                 </ol>
                 </div>
@@ -113,6 +113,10 @@ export default {
         ErrorMessage,
     },
     methods: {
+        linkTo(path) { // change base when needed
+            // return '/employee-vue' + path
+            return path
+        },
         joinDateFocus(e) {
             e.target.type = "date"
         },

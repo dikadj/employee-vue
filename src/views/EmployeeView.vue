@@ -15,7 +15,7 @@
       <div class="container-fluid mx-3">
         <div class="row">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><router-link to="/">Home</router-link></li>
+            <li class="breadcrumb-item"><router-link :to="linkTo('/')">Home</router-link></li>
             <li class="breadcrumb-item active">Employee</li>
           </ol>
         </div>
@@ -36,7 +36,7 @@
           <div class="d-flex justify-content-between align-items-center">
             <h3 class="card-title align-middle"><strong>List</strong> Employee</h3>
   
-            <router-link to="/employee/add" class="btn btn-dark btn-sm px-4">
+            <router-link :to="linkTo('/employee/add')" class="btn btn-dark btn-sm px-4">
               <strong>ADD</strong>
             </router-link>
           </div>
@@ -75,7 +75,7 @@
                   <td class="text-left">{{ formatDdMmYyyy(e.join_date) }} ({{ howManyYears(e.join_date) }} Years)</td>
                   <td class="text-left"><span>Rp.</span> <span>{{ rpSalary(e.salary) }}</span></td>
                   <td class="d-flex justify-content-end pr-0">
-                    <router-link :to="`/employee/update/${e.nik}`" class="btn btn-primary btn-sm px-3 mx-2">
+                    <router-link :to="linkTo(`/employee/update/${e.nik}`)" class="btn btn-primary btn-sm px-3 mx-2">
                       <strong>UPDATE</strong>
                     </router-link>
                     <Form @submit="() => { deleteEmployee(e.nik, e.id) }">
@@ -158,6 +158,10 @@ export default {
     }
   },
   methods: {
+    linkTo(path) { // change base when needed
+      // return '/employee-vue' + path
+      return path
+    },
     goToPage(p, emList) {
       this.currentPage = p
       this.setEmployeesByPage(p, emList)
@@ -220,8 +224,9 @@ export default {
           // updates view
           this.employeesReset = this.employeesReset.filter(e => parseInt(e.nik) !== parseInt(nik))
           this.employees = this.employees.filter(e => parseInt(e.nik) !== parseInt(nik))
-          this.employeesByPage = this.employeesByPage.filter(e => parseInt(e.nik) !== parseInt(nik))
+          // this.employeesByPage = this.employeesByPage.filter(e => parseInt(e.nik) !== parseInt(nik))
           store.employees = store.employees.filter(e => parseInt(e.nik) !== parseInt(nik))
+          this.setEmployeesByPage(this.currentPage, store.employees.filter(e => parseInt(e.nik) !== parseInt(nik)))
           toastr.success(`Employee ${id} has been successfully deleted`)
         })
       }
